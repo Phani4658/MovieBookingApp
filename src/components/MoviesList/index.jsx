@@ -31,6 +31,11 @@ class MoviesList extends Component {
         }
     }
 
+    saveMovieDetails = (movieDetails) => {
+        console.log(movieDetails)
+        localStorage.setItem("movieDetails",JSON.stringify(movieDetails));
+    }
+
     renderSuccessView = () => {
         // This method is called when the API Call gets successful and the movies List will be loaded
         const { moviesList } = this.state;
@@ -39,7 +44,7 @@ class MoviesList extends Component {
             <>
                 {
                     moviesList.map((movieDetails) => {
-                        return <MovieCard details={movieDetails} key={movieDetails.show.id} className="styled-scrollbars" />
+                        return <MovieCard details={movieDetails} key={movieDetails.show.id} saveMovieDetails = {this.saveMovieDetails} />
                     })
                 }
             </>
