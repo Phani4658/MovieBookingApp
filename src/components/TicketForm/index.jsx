@@ -16,7 +16,7 @@ const TicketForm = ({name}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
-        <BookTicketsBtn onClick={onOpen}>Open Modal</BookTicketsBtn>
+        <BookTicketsBtn onClick={onOpen}>Book Tickets</BookTicketsBtn>
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
