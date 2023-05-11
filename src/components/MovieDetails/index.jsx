@@ -1,13 +1,16 @@
-import {AiOutlineStar} from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
 import { GenreCard, GenreContainer, ImageCard, ImageCardText, MovieDetailsBg, MovieDetailsContainer, MovieImageBg, MovieName, GenreText, Description, BookTicketsBtn } from "./styledcomponents";
+import TicketForm from '../TicketForm';
+
 
 const MovieDetails = () => {
     const movieDetails = JSON.parse(localStorage.getItem("movieDetails"));
-    const {score,show} = movieDetails;
-    const {image,runtime,status,rating,name,genres,summary,premiered,language} = show
+    const { score, show } = movieDetails;
+    const { image, runtime, status, rating, name, genres, summary, premiered, language } = show
     const avgRating = rating.average ? rating.average : 0;
     const originalImg = image ? image.original : "https://cdn.shopify.com/s/files/1/2122/6609/products/0_8848e0ab-a58f-4c93-b334-56a02cfb1af7_300x300.jpg?v=1675332332";
-    return(
+
+    return (
         <MovieDetailsBg>
             <MovieImageBg image={originalImg}>
                 <ImageCard>
@@ -17,7 +20,7 @@ const MovieDetails = () => {
                     <ImageCardText>{status} </ImageCardText>
                 </ImageCard>
                 <ImageCard>
-                    <AiOutlineStar  />
+                    <AiOutlineStar />
                     <ImageCardText>{avgRating} </ImageCardText>
                 </ImageCard>
             </MovieImageBg>
@@ -30,11 +33,11 @@ const MovieDetails = () => {
                         </GenreCard>
                     ))}
                 </GenreContainer>
-                <Description>{summary.replace("<p>","").replace("</p>","")}</Description> 
+                <Description>{summary.replace("<p>", "").replace("</p>", "")}</Description>
                 <br />
-                <Description style={{color:"white"}}>Premiered At: {premiered}</Description>
-                <Description style={{color:"white"}}>Language: {language}</Description>
-                <BookTicketsBtn>Book Tickets</BookTicketsBtn>     
+                <Description style={{ color: "white" }}>Premiered At: {premiered}</Description>
+                <Description style={{ color: "white" }}>Language: {language}</Description>
+                <TicketForm name={name} />
             </MovieDetailsContainer>
         </MovieDetailsBg>
     )

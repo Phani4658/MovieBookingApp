@@ -1,52 +1,53 @@
-import React from 'react';
-import Popup from 'reactjs-popup';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Button
+} from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
+import { BookTicketsBtn } from '../MovieDetails/styledcomponents'
+import { FormInput, FormLabel, FormSelect } from './styledcomponents'
 
-export default TicketForm = () => (
-  <Popup
-    trigger={<button className="button"> Open Modal </button>}
-    modal
-    nested
-  >
-    {close => (
-      <div className="modal">
-        <button className="close" onClick={close}>
-          &times;
-        </button>
-        <div className="header"> Book Your Tickets </div>
-        <div className="content">
-          {' '}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum.
-          Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates
-          delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
-          <br />
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
-          commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
-          explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
-        </div>
-        <div className="actions">
-          <Popup
-            trigger={<button className="button"> Trigger </button>}
-            position="top center"
-            nested
-          >
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-              magni omnis delectus nemo, maxime molestiae dolorem numquam
-              mollitia, voluptate ea, accusamus excepturi deleniti ratione
-              sapiente! Laudantium, aperiam doloribus. Odit, aut.
-            </span>
-          </Popup>
-          <button
-            className="button"
-            onClick={() => {
-              console.log('modal closed ');
-              close();
-            }}
-          >
-            close modal
-          </button>
-        </div>
-      </div>
-    )}
-  </Popup>
-);
+const TicketForm = ({name}) => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    return (
+      <>
+        <BookTicketsBtn onClick={onOpen}>Open Modal</BookTicketsBtn>
+  
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Book Tickets for {name}</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+                <FormLabel>Email</FormLabel>
+                <FormInput input="text" />
+                <FormLabel>No of Seats</FormLabel>
+                <FormInput input="number" />
+                <FormLabel>Show Timings</FormLabel>
+                <FormSelect>
+                    <option>10:30 AM</option>
+                    <option>1:30 PM</option>
+                    <option>4:30 PM</option>
+                    <option>7:00 PM</option>
+                    <option>10:00 PM</option>
+                </FormSelect>
+            </ModalBody>
+  
+            <ModalFooter>
+              <Button colorScheme='blue' mr={3} onClick={onClose}>
+                Close
+              </Button>
+              <Button variant='ghost' onClick={onClose}>Confirm</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    )
+  }
+
+  export default TicketForm
